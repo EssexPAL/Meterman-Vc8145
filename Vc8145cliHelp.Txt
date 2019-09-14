@@ -1,0 +1,70 @@
+
+        Vc8145Cli [-d:n] [-a:n] [-s:n] [-w:n] [-i:n] [-h or /?] [-p:COMn] [-fs:] [-m:] [-fn:] [-fo:]
+
+        Usage:
+                -d:n         n = the delay, in mS, before the first measurement is made.
+                -s:n         n = the number of samples to be taken.
+                -a:n         n = the number of samples to be averaged without a window of acceptability
+                -w:n         n = the window of sample acceptabilty in percent i.e. if this value is 10 then
+                                 only samples with 10% of the centre sample will be included in the average.
+                -i:n         n = the delay, in mS, after each sample has been taken.
+                -h or /?     Show this help.
+                -p:COMn      n = Com port number in use - e.g. to use com 3 -p:COM3
+                -fs:n        n = ASCII value of Field seperator e.g. fs:9 is tab character.
+                -m:"Message" The text message should be replaced with any text that you wish to include
+                             in the output.  Surround text with spaces by double quotes.
+                -fn:filename The filename that the reading will be saved to.  If the filename contains spaces
+                             then it should be surrounded with double quotation marks.  If the filename is
+                             not specified then the output will go to the command line (Stdout).
+                -fo:format   Numbers, comma separated, representing the fields to be included in the output.
+                             e.g. 1,2,3,4,5,6
+                             The fields are as follows:  1 Date
+                                                         2 Time
+                                                         3 User Message (default is "Vc8145")
+                                                         4 Multimeter Mode (values are 4 - 15)
+                                                         5 Multimeter Select (values are 0 - 3)
+                                                         6 Main Reading
+                                                         7 Reading type (V AC, V DC, mV, mA etc)
+                                                         8 Relative Selected Indication
+                                                         9 Hold Type (A-H, PH etc)
+                                                        10 Min/Max Type (Min, Max, Min-Max, Avg)
+                                                        11 Second Display Reading
+                                                        12 Second Display Reading Type (Hz % etc)
+
+
+        Defaults:       -d  = 250mS
+                        -s  = 3 samples
+                        -a  = 0 window only average
+                        -w  = average window 10 (percent)
+                        -p  = COM1
+                        -fs = , (0x44)
+                        -m  "Vc8145"
+                        -fn None
+                        -fo = 1,2,3,4,5,6,7,8,9,10,11,12
+
+
+        examples:       Vc8145Cli -d:100 -s:10 -w:25 -i:100 -p:COM3 -fs:9 -mTest -fn:Test.Txt -fo: 0,1,2,3
+                        This example will display the Date, Time, user message and reading.  The measurement
+                        will have pre and post reading delays of 100mS, ten samples will be taken with an
+                        acceptability window of 25%.  The field separator character is a tab, the user
+                        message is Test and the filename is Test.Txt
+
+                        Vc8145Cli -d:1250 -s:8 -a:6 -i:100 -p:COM3 -fs:0x44 -mTest -fn:Testing.Txt -fo: 0,1,2,6
+                        This example will display the user message, reading, reading type and status.
+                        The pre sample delay is 1250mS, the post sample delay is 100mS, six samples will be taken
+                        and averaged without an acceptability window.  The field separator character is a comma,
+                        the user message is Test and the fi1lename is Testing.Txt.
+
+                        Vc8145Cli -p:COM6
+                        With the meter on COM6, set to AC Volts, select pressed once and no input connections,
+                        the returned string will look similar to the one below:
+
+                        14/09/19,08:44:01.123,Vc8145,15,1, 2.5467999,V AC,,,,49.8900032,Hz
+
+        Information:    The Vc8145 can only provide readings at the rate of approxamately 4 per second.
+                        Whilst the serial port can collect readings at a greater rate any collections that
+                        occur with a gap of less than 250mS are likely to be a repeat of the previous one.
+
+        Any bugs, comments or improvement suggestions to meterman.accenttechnology@gmail.com
+
+
