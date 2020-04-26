@@ -1,0 +1,16 @@
+The RS232 implementation on the VC8154 is not complete, the result of this is that
+it may not work, properly or at all, on RS232 ports, USB connected or built in.  
+The primary problem is that the transmit signal from the VC8145 swings only
+between 0v and 5v, it should swing between a minimum of -3 to +3v.  
+The result is that when the VC8145 replies to a received message it is not seen
+by the port or it is corrupted, this is dependent upon the manufacturer of the port.
+I have a few different USB->RS232 devices and the only one that works reliably
+is the Easysync USB-2COM-M, I would expect other Easysync converters to be ok.  
+The best fix is, make/buy (from eBay or elsewhere) a small converter board, 
+and fit it internally to the instrument so that RS232 is properly implemented.   
+
+The other option is to buy a USB-> Serial board and fit that that making the 
+meter USB accessible. Once again beware of signals being inverted.
+
+WARNING - most of the RS232 chips will invert the transmit signal so you will
+need to invert between the instrument and the converter board. 
