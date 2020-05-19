@@ -1,5 +1,5 @@
 # Meterman-Vc8145
-Vichy VC8145 GUI and command line software
+Vichy VC8145 GUI and command line software for Windows
 
 This software replaces that which comes with the Vc8145.
 
